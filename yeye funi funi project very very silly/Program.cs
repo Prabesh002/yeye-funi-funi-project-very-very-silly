@@ -40,7 +40,7 @@ namespace OpiumOsaka
                 {
                     try
                     {
-                        HttpResponseMessage response = await client.GetAsync("https://opentdb.com/api.php?amount=1&type=multiple");
+                        HttpResponseMessage response = await client.GetAsync("https://opentdb.com/api.php?amount=1&category=20&difficulty=hard&type=multiple");
                         if (response.IsSuccessStatusCode)
                         {
                             string responseBody = await response.Content.ReadAsStringAsync();
