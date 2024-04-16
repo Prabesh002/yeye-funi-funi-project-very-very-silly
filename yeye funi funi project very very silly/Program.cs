@@ -31,8 +31,7 @@ namespace OpiumOsaka
             Program program= new Program();
             Console.WriteLine("Welcome to Nitrous Oxide Gang You will face consequences for this brainrot  Press any key to continue");
             Console.ReadKey();
-            string key = "";
-            optionType optionType = optionType.numeric;
+            string? key;
             Console.WriteLine($"Please select your option type. Select numeric for {optionType.numeric} and text for {optionType.text}");
             key = Console.ReadLine();
             key.ToLower();

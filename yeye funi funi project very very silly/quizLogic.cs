@@ -13,22 +13,22 @@ namespace OpiumOsaka
         {
             while (true)
             {
-                using (HttpClient client = new HttpClient())
+                using (HttpClient? client = new HttpClient())
                 {
                     try
                     {
-                        HttpResponseMessage response = await client.GetAsync("https://opentdb.com/api.php?amount=1&category=20&difficulty=hard&type=multiple");
+                        HttpResponseMessage? response = await client.GetAsync("https://opentdb.com/api.php?amount=1&category=20&difficulty=hard&type=multiple");
                         if (response.IsSuccessStatusCode)
                         {
-                            string responseBody = await response.Content.ReadAsStringAsync();
-                            TriviaQuestionResponse triviaResponse = JsonConvert.DeserializeObject<TriviaQuestionResponse>(responseBody);
+                            string? responseBody = await response.Content.ReadAsStringAsync();
+                            TriviaQuestionResponse? triviaResponse = JsonConvert.DeserializeObject<TriviaQuestionResponse>(responseBody);
 
                             if (triviaResponse != null && triviaResponse.Results.Count > 0)
                             {
-                                TriviaQuestion question = triviaResponse.Results[0];
+                                TriviaQuestion? question = triviaResponse.Results[0];
                                 Console.WriteLine("Question: " + question.Question);
 
-                                List<string> answers = new List<string>();
+                                List<string>? answers = new List<string>();
                                 if(type == optionType.text)
                                 {
                                     Console.WriteLine("Here are some options for you peasants [Answer is case sensetive, you won't be spared either way]");
@@ -49,9 +49,9 @@ namespace OpiumOsaka
                                 Console.WriteLine("Enter your Answer, Remember wrong answer = data sell");
 
 
-                                if(type == optionType.text)
+                                if (type == optionType.text)
                                 {
-                                    string m_answer = Console.ReadLine();
+                                    string? m_answer = Console.ReadLine();
                                     if (m_answer == question.CorrectAnswer)
                                     {
                                         Console.WriteLine("Correct, You're spared.");
@@ -61,7 +61,7 @@ namespace OpiumOsaka
                                     {
                                         Console.WriteLine($"Unfortunately, your answer {m_answer} does not equate to {question.CorrectAnswer}");
                                         Console.WriteLine("Would you like another chance? Y/N");
-                                        string res = Console.ReadLine();
+                                        string? res = Console.ReadLine();
                                         switch (res.ToUpper()) // Convert to upper case for case insensitivity
                                         {
                                             case "Y":
@@ -75,9 +75,10 @@ namespace OpiumOsaka
                                                 return; // Exit the function
                                         }
                                     }
-                                }else if(type == optionType.numeric)
+                                }
+                                else if (type == optionType.numeric)
                                 {
-                                    string m_answer = Console.ReadLine();
+                                    string? m_answer = Console.ReadLine();
                                     try
                                     {
                                         int s_option = Int32.Parse(m_answer);
@@ -85,11 +86,12 @@ namespace OpiumOsaka
                                         {
                                             Console.WriteLine("Correct, You're spared.");
                                             Console.WriteLine("Fetching more data...");
-                                        } else
+                                        }
+                                        else
                                         {
                                             Console.WriteLine($"Unfortunately, your answer {answers[s_option]} does not equate to {question.CorrectAnswer}");
                                             Console.WriteLine("Would you like another chance? Y/N");
-                                            string res = Console.ReadLine();
+                                            string? res = Console.ReadLine();
                                             switch (res.ToUpper()) // Convert to upper case for case insensitivity
                                             {
                                                 case "Y":
@@ -104,16 +106,12 @@ namespace OpiumOsaka
                                             }
                                         }
                                     }
-                                    catch(FormatException)
+                                    catch (FormatException)
                                     {
                                         Console.WriteLine($"Unable to take {m_answer} as an option");
                                         break;
                                     }
                                 }
-
-
-                               
-
                             }
                             else
                             {
