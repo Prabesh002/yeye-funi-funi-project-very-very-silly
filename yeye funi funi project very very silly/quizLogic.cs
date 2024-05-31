@@ -9,7 +9,7 @@ namespace OpiumOsaka
 {
     public class quizLogic
     {
-        public async Task fetchData(optionType type)
+        public static async Task fetchData(optionType type)
         {
             while (true)
             {
@@ -22,6 +22,7 @@ namespace OpiumOsaka
                         {
                             string? responseBody = await response.Content.ReadAsStringAsync();
                             TriviaQuestionResponse? triviaResponse = JsonConvert.DeserializeObject<TriviaQuestionResponse>(responseBody);
+
 
                             if (triviaResponse != null && triviaResponse.Results.Count > 0)
                             {
@@ -81,7 +82,7 @@ namespace OpiumOsaka
                                     string? m_answer = Console.ReadLine();
                                     try
                                     {
-                                        int s_option = Int32.Parse(m_answer);
+                                        int s_option = int.Parse(m_answer);
                                         if (answers[s_option] == question.CorrectAnswer)
                                         {
                                             Console.WriteLine("Correct, You're spared.");

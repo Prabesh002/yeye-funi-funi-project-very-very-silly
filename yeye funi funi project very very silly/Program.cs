@@ -24,7 +24,7 @@ namespace OpiumOsaka
         text
     }
 
-    class Program
+    class Program : quizLogic
     {
         async static Task Main(string[] args)
         {
@@ -32,9 +32,9 @@ namespace OpiumOsaka
             Console.WriteLine("Welcome to Nitrous Oxide Gang You will face consequences for this brainrot  Press any key to continue");
             Console.ReadKey();
             string? key;
-            Console.WriteLine($"Please select your option type. Select numeric for {optionType.numeric} and text for {optionType.text}");
+            Console.WriteLine($"Please select your option type. type numeric for {optionType.numeric} and text for {optionType.text}");
             key = Console.ReadLine();
-            key.ToLower();
+            key= key.ToLower();
             Console.WriteLine("You must guess the right answer, if you don't we will sell your data to the chinese government! [Emter to continue]");
             Console.ReadKey();
             Console.WriteLine("Fetching questions...");
@@ -44,16 +44,15 @@ namespace OpiumOsaka
 
         static async Task GetQuestions(string option)
         {
-            quizLogic quizLogic = new quizLogic();
             switch (option)
             {
                 case "numeric":
-                    await quizLogic.fetchData(optionType.numeric);
+                    await fetchData(optionType.numeric);
 
                  break;
 
                 case "text":
-                    await quizLogic.fetchData(optionType.text);
+                    await fetchData(optionType.text);
                     break;
 
                 default:
